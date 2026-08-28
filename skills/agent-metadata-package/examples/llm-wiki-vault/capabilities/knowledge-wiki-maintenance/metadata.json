@@ -1,0 +1,5 @@
+{
+  "capabilityId": "knowledge-wiki-maintenance",
+  "skills": ["wiki-ingest", "wiki-query", "wiki-lint"],
+  "workspaceAssets": ["llm-wiki-vault"]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "grafana",
+  "transport": "stdio",
+  "command": "mcp-grafana",
+  "args": [],
+  "environment": {
+    "GRAFANA_URL": "${GRAFANA_URL}",
+    "GRAFANA_SERVICE_ACCOUNT_TOKEN": "${GRAFANA_SERVICE_ACCOUNT_TOKEN}",
+    "MCP_GRAFANA_API_KEY": "${MCP_GRAFANA_API_KEY}"
+  },
+  "tools": {
+    "include": [
+      "search_dashboards",
+      "get_dashboard_summary",
+      "get_dashboard_by_uid",
+      "get_dashboard_property",
+      "get_dashboard_panel_queries",
+      "update_dashboard",
+      "generate_deeplink",
+      "list_datasources",
+      "get_datasource",
+      "grafana_api_request"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "0.1",
+  "package": {
+    "id": "karpathy-llm-wiki-vault-metadata",
+    "version": "0.1.0",
+    "name": "Karpathy LLM Wiki Vault Metadata",
+    "description": "Karpathy LLM Wiki Obsidian 知识库维护能力的元数据包示例"
+  },
+  "capabilities": [
+    {
+      "id": "knowledge-wiki-maintenance",
+      "path": "capabilities/knowledge-wiki-maintenance"
+    }
+  ],
+  "skills": [
+    {
+      "id": "wiki-ingest",
+      "path": "common/skills/wiki-ingest"
+    },
+    {
+      "id": "wiki-query",
+      "path": "common/skills/wiki-query"
+    },
+    {
+      "id": "wiki-lint",
+      "path": "common/skills/wiki-lint"
+    }
+  ],
+  "workspaceAssets": [
+    {
+      "id": "llm-wiki-vault",
+      "path": "common/workspace/llm-wiki-vault"
+    }
+  ],
+  "bootstrap": "BOOTSTRAP.md",
+  "distribution": {
+    "exclude": [
+      "dist/**",
+      "**/.env",
+      "**/.obsidian/workspace.json",
+      "**/.obsidian/workspace-mobile.json",
+      "**/sessions/**",
+      "**/logs/**",
+      "**/state.db*"
+    ]
+  }
+}

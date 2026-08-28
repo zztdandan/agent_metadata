@@ -1,0 +1,19 @@
+{
+  "variables": [
+    {
+      "name": "EXAMPLE_SERVICE_URL",
+      "kind": "url",
+      "required": true,
+      "description": "示例服务地址",
+      "example": "http://127.0.0.1:3000",
+      "consumers": ["mcp.example-mcp"]
+    },
+    {
+      "name": "EXAMPLE_SERVICE_TOKEN",
+      "kind": "secret",
+      "required": true,
+      "description": "示例服务令牌",
+      "consumers": ["mcp.example-mcp"]
+    }
+  ]
+}

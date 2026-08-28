@@ -1,0 +1,16 @@
+{
+  "capabilityId": "datacenter-query-agent",
+  "skills": [
+    "datacenter-agent-runtime",
+    "datacenter-agent-cloud-tss-query",
+    "datacenter-agent-tdengine-longstmt"
+  ],
+  "mcp": ["grafana"],
+  "workspaceAssets": ["dedge-datacenter-project"],
+  "environment": [
+    "GRAFANA_URL",
+    "GRAFANA_SERVICE_ACCOUNT_TOKEN",
+    "MCP_GRAFANA_API_KEY",
+    "DEDGE_AGENT_MEMORY_PATH"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dedge Dashboard Catalog Manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "project",
+    "environment",
+    "currentView",
+    "tree",
+    "dashboards"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "project": { "type": "string" },
+    "environment": { "type": "string" },
+    "createdAt": { "type": ["string", "null"] },
+    "updatedAt": { "type": ["string", "null"] },
+    "currentView": {
+      "type": ["object", "null"],
+      "required": ["catalogNodeId", "dashboardId", "iframeUrl", "updatedAt"],
+      "properties": {
+        "catalogNodeId": { "type": ["string", "null"] },
+        "dashboardId": { "type": ["string", "null"] },
+        "iframeUrl": { "type": ["string", "null"] },
+        "updatedAt": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "tree": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/treeNode"
+      }
+    },
+    "dashboards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dashboardAsset"
+      }
+    }
+  },
+  "$defs": {
+    "treeNode": {
+      "type": "object",
+      "required": ["id", "title", "type", "children"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["directory", "dashboard-ref"]
+        },
+        "dashboardId": { "type": ["string", "null"] },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/treeNode"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "dashboardAsset": {
+      "type": "object",
+      "required": ["id", "title", "description", "grafana", "tags", "updatedAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "grafana": {
+          "type": "object",
+          "required": ["dashboardUid", "dashboardUrl", "iframeUrl"],
+          "properties": {
+            "dashboardUid": { "type": "string" },
+            "dashboardUrl": { "type": "string" },
+            "dashboardShareUrl": { "type": ["string", "null"] },
+            "iframeUrl": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "updatedAt": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

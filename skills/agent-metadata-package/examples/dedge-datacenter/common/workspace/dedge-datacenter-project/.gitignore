@@ -1,0 +1,74 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Python / Node build outputs
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+node_modules/
+coverage/
+
+# Local env / secrets
+.env
+.env.*
+!.env.example
+*.token
+*.secret
+
+# Local app/runtime data
+backend/.pytest_cache/
+backend/.venv/
+frontend/node_modules/
+
+# Hermes runtime state under the project-local HERMES_HOME
+.hermes/auth.json
+.hermes/auth.lock
+.hermes/.hermes_history
+.hermes/state.db*
+.hermes/active_profile
+.hermes/sessions/
+.hermes/logs/
+.hermes/cache/
+.hermes/memories/
+.hermes/memory/
+.hermes/backups/
+.hermes/checkpoints/
+.hermes/state-snapshots/
+.hermes/home/
+.hermes/tmp/
+.hermes/plans/
+.hermes/models_dev_cache.json
+.hermes/provider_models_cache.json
+.hermes/ollama_cloud_models_cache.json
+.hermes/.skills_prompt_snapshot.json
+.hermes/.update_check
+.hermes/bin/
+.hermes/verification_evidence.db
+.hermes/skills/.hub/
+.hermes/skills/.curator_state
+.hermes/skills/.bundled_manifest
+.hermes/skills/.usage.json
+.hermes/skills/.usage.json.lock
+.dedge/
+# Keep only the distributed project Hermes skeleton versioned
+!.hermes/.gitignore
+!.hermes/.env.example
+!.hermes/README.md
+!.hermes/config.yaml
+!.hermes/SOUL.md
+!.hermes/skills/
+!.hermes/skills/dedge-orchestrator-runtime/
+!.hermes/skills/dedge-orchestrator-runtime/SKILL.md
+!.hermes/skills/dedge-catalog-maintenance/
+!.hermes/skills/dedge-catalog-maintenance/SKILL.md
+!.hermes/skills/dedge-cloud-tss-query/
+!.hermes/skills/dedge-cloud-tss-query/SKILL.md
+!.hermes/skills/dedge-grafana-dashboard/
+!.hermes/skills/dedge-grafana-dashboard/SKILL.md
+
+# FE
+frontend/dist/
+

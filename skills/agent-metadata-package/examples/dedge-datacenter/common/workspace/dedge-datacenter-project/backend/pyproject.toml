@@ -1,0 +1,21 @@
+[project]
+name = "dedge-datacenter-api"
+version = "0.1.0"
+description = "dedge IoT Datacenter MVP backend — API, catalog, WS, static hosting"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.34",
+    "pydantic>=2",
+    "python-multipart>=0.0.20",
+    "httpx>=0.28",
+]
+
+[build-system]
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8",
+]

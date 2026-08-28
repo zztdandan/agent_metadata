@@ -1,0 +1,16 @@
+{
+  "capabilityId": "datacenter-dashboard-agent",
+  "skills": [
+    "datacenter-agent-runtime",
+    "datacenter-agent-grafana-dashboard",
+    "datacenter-agent-catalog-maintenance"
+  ],
+  "mcp": ["grafana"],
+  "workspaceAssets": ["dedge-datacenter-project"],
+  "environment": [
+    "GRAFANA_URL",
+    "GRAFANA_SERVICE_ACCOUNT_TOKEN",
+    "MCP_GRAFANA_API_KEY",
+    "DEDGE_AGENT_MEMORY_PATH"
+  ]
+}

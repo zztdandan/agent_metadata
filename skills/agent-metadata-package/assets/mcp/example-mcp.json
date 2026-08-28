@@ -1,0 +1,10 @@
+{
+  "id": "example-mcp",
+  "transport": "stdio",
+  "command": "example-mcp-server",
+  "args": [],
+  "environment": {
+    "EXAMPLE_SERVICE_URL": "${EXAMPLE_SERVICE_URL}",
+    "EXAMPLE_SERVICE_TOKEN": "${EXAMPLE_SERVICE_TOKEN}"
+  }
+}

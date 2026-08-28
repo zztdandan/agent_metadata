@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "0.1",
+  "package": {
+    "id": "dedge-datacenter-agent-metadata",
+    "version": "0.1.0",
+    "name": "Dedge Datacenter Agent Metadata",
+    "description": "dedge 数据中心问数与 Grafana 看板能力的元数据包示例"
+  },
+  "capabilities": [
+    {
+      "id": "datacenter-query-agent",
+      "path": "capabilities/datacenter-query-agent"
+    },
+    {
+      "id": "datacenter-dashboard-agent",
+      "path": "capabilities/datacenter-dashboard-agent"
+    }
+  ],
+  "skills": [
+    { "id": "datacenter-agent-runtime", "path": "common/skills/datacenter-agent-runtime" },
+    { "id": "datacenter-agent-catalog-maintenance", "path": "common/skills/datacenter-agent-catalog-maintenance" },
+    { "id": "datacenter-agent-cloud-tss-query", "path": "common/skills/datacenter-agent-cloud-tss-query" },
+    { "id": "datacenter-agent-grafana-dashboard", "path": "common/skills/datacenter-agent-grafana-dashboard" },
+    { "id": "datacenter-agent-tdengine-longstmt", "path": "common/skills/datacenter-agent-tdengine-longstmt" }
+  ],
+  "mcp": [
+    { "id": "grafana", "path": "common/mcp/grafana.json" }
+  ],
+  "environment": {
+    "contract": "common/environment/environment.json",
+    "example": "common/environment/.env.example"
+  },
+  "workspaceAssets": [
+    {
+      "id": "dedge-datacenter-project",
+      "path": "common/workspace/dedge-datacenter-project"
+    }
+  ],
+  "adapters": [
+    { "id": "hermes", "path": "adapters/hermes", "status": "experimental" }
+  ],
+  "bootstrap": "BOOTSTRAP.md",
+  "distribution": {
+    "exclude": [
+      "dist/**",
+      "**/.env",
+      "**/sessions/**",
+      "**/logs/**",
+      "**/state.db*",
+      "**/__pycache__/**",
+      "**/node_modules/**",
+      "**/.pytest_cache/**",
+      "**/.venv/**"
+    ]
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0.0",
+  "project": "dedge-datacenter",
+  "environment": "default",
+  "createdAt": "2026-07-10T02:01:05Z",
+  "updatedAt": "2026-07-10T08:19:48Z",
+  "currentView": {
+    "catalogNodeId": "node-coll1-all-points",
+    "dashboardId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "iframeUrl": "{agentmemory.grafana.publicDashboardBaseUrl}/6fefb1a9404b408fb0c9dd86a61f3cd1",
+    "updatedAt": "2026-07-10T08:19:48Z"
+  },
+  "tree": [
+    {
+      "id": "node-acceptance",
+      "title": "验收",
+      "type": "directory",
+      "dashboardId": null,
+      "children": [
+        {
+          "id": "node-acceptance-full-model",
+          "title": "全量复用(多Panel)",
+          "type": "dashboard-ref",
+          "dashboardId": "27a2798d-743e-4574-9564-e0d0b2e52de0",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "node-battery-monitor",
+      "title": "电池监控",
+      "type": "directory",
+      "dashboardId": null,
+      "children": [
+        {
+          "id": "node-battery-temp-max-his",
+          "title": "历史最高温度趋势",
+          "type": "dashboard-ref",
+          "dashboardId": "2dcdf7a2-9066-4946-8a52-d4d7ca4774c3",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "node-coll1-all-points",
+      "title": "coll1 全测点总览",
+      "type": "dashboard-ref",
+      "dashboardId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "children": []
+    }
+  ],
+  "dashboards": [
+    {
+      "id": "27a2798d-743e-4574-9564-e0d0b2e52de0",
+      "title": "MVP 验收 多Panel全量复用",
+      "description": "全量物联网验收看板 (版本18)。8 个面板共用同一个 TSS longstmt 全量查询 /api/v1/query/df2d8ef118e503c8 (measurement=dadevice-coll-1_double_4e7cde5f, tl_code=deploy-tl-main)，默认时间范围 5 分钟。",
+      "grafana": {
+        "dashboardUid": "27a2798d-743e-4574-9564-e0d0b2e52de0",
+        "dashboardUrl": "{agentmemory.grafana.url}/d/27a2798d-743e-4574-9564-e0d0b2e52de0/mvp-e9aa8c-e694b6-vol-e58d95-e580bc",
+        "dashboardShareUrl": "{agentmemory.grafana.url}/d/27a2798d-743e-4574-9564-e0d0b2e52de0/mvp-e9aa8c-e694b6-vol-e58d95-e580bc?orgId=1&from=now-5m&to=now&timezone=Asia%2FShanghai&shareView=public_dashboard",
+        "iframeUrl": "{agentmemory.grafana.publicDashboardBaseUrl}/ccb91556780746f4b4ab2b66cd6dea3f"
+      },
+      "tags": [
+        "dedge",
+        "mvp",
+        "multi-panel",
+        "full-model",
+        "acceptance",
+        "battery",
+        "temperature",
+        "current",
+        "influxdb"
+      ],
+      "updatedAt": "2026-07-10T03:27:43Z"
+    },
+    {
+      "id": "2dcdf7a2-9066-4946-8a52-d4d7ca4774c3",
+      "title": "电池历史最高温度趋势",
+      "description": "电池历史最高温度 TEMP_MAX_HIS 专用看板。单一 timeseries 面板展示历史最高温度变化趋势，共用 TSS longstmt 全量查询 /api/v1/query/df2d8ef118e503c8 (measurement=dadevice-coll-1_double_4e7cde5f, tl_code=deploy-tl-main)，通过 transforms filterByValue regex ^TEMP_MAX_HIS$ 筛选。默认 5m 范围，时区 Asia/Shanghai，单位 celsius。数据验证：ds/query API 确认 5 分钟内返回 43 条 TEMP_MAX_HIS 记录。",
+      "grafana": {
+        "dashboardUid": "2dcdf7a2-9066-4946-8a52-d4d7ca4774c3",
+        "dashboardUrl": "{agentmemory.grafana.url}/d/2dcdf7a2-9066-4946-8a52-d4d7ca4774c3/f69f8ec",
+        "dashboardShareUrl": "{agentmemory.grafana.url}/d/2dcdf7a2-9066-4946-8a52-d4d7ca4774c3/f69f8ec?orgId=1&from=now-5m&to=now&timezone=Asia%2FShanghai&shareView=public_dashboard",
+        "iframeUrl": "{agentmemory.grafana.publicDashboardBaseUrl}/f7f1d4c6543947f4839ea0a95ce44b63"
+      },
+      "tags": [
+        "dedge",
+        "battery",
+        "temperature",
+        "max-historical",
+        "timeseries",
+        "influxdb"
+      ],
+      "updatedAt": "2026-07-10T07:15:00Z"
+    },
+    {
+      "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "title": "coll1 全测点总览",
+      "description": "coll1 (DADEVICE_COLL_1) 全测点展示看板(v11)。8 个面板共用 TSS longstmt df2d8ef118e503c8 (measurement=dadevice-coll-1_double_4e7cde5f, tl_code=deploy-tl-main)，默认 15 分钟范围。温度监测(7项: TEMP_AVG/C1/C2/FAN_SET/MAX/MAX_HIS/MIN) + 电流A(CUR1-25+CUR) + 电流B(CUR26-50) + SOC/SOH/VOL/SOC_LOW_SP/CHARGE_TIMES15 stat 卡片。63 个活跃 DOUBLE 测点全覆盖。已通过文本快照验证数据渲染。",
+      "grafana": {
+        "dashboardUid": "5a82c98d-63f5-4dfc-8f3a-c59bd341fb24",
+        "dashboardUrl": "{agentmemory.grafana.url}/d/5a82c98d-63f5-4dfc-8f3a-c59bd341fb24/coll1-e585a8-e6b58b-e782b9-e680bb-e8a788",
+        "dashboardShareUrl": "{agentmemory.grafana.url}/d/5a82c98d-63f5-4dfc-8f3a-c59bd341fb24/coll1-e585a8-e6b58b-e782b9-e680bb-e8a788?orgId=1&from=now-15m&to=now&timezone=Asia%2FShanghai&shareView=public_dashboard",
+        "iframeUrl": "{agentmemory.grafana.publicDashboardBaseUrl}/6fefb1a9404b408fb0c9dd86a61f3cd1"
+      },
+      "tags": [
+        "dedge",
+        "coll1",
+        "full-model",
+        "temperature",
+        "current",
+        "battery",
+        "all-points",
+        "influxdb"
+      ],
+      "updatedAt": "2026-07-10T08:19:48Z"
+    }
+  ],
+  "preferences": {},
+  "lessons": []
+}

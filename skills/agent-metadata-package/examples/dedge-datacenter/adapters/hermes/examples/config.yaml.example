@@ -1,0 +1,96 @@
+_config_version: 33
+model:
+  provider: mona
+  default: zhipu/glm-5.2
+providers:
+  deepseek:
+    api_mode: chat_completions
+    base_url: https://api.deepseek.com/v1
+    key_env: DEEPSEEK_API_KEY
+    discover_models: false
+    models:
+      - deepseek-v4-pro
+      - deepseek-v4-flash
+  mona:
+    base_url: https://moma.cmecloud.cn/v1
+    api_mode: chat_completions
+    key_env: MONA_API_KEY
+    discover_models: false
+    models:
+      - zhipu/glm-5.2
+platform_toolsets:
+  cli:
+    - terminal
+    - file
+    - code_execution
+    - browser
+    - skills
+    - todo
+    - clarify
+agent:
+  max_turns: 90
+  disabled_toolsets:
+    - session_search
+    - web
+    - vision
+    - delegation
+    - cronjob
+    - messaging
+    - hermes-gateway
+    - image_gen
+    - video
+    - video_gen
+    - tts
+    - spotify
+    - homeassistant
+    - discord
+    - discord_admin
+    - feishu_doc
+    - feishu_drive
+    - yuanbao
+    - moa
+    - rl
+compression:
+  enabled: true
+  threshold: 0.6
+auxiliary:
+  compression:
+    provider: deepseek
+    model: deepseek-v4-flash
+  title_generation:
+    provider: deepseek
+    model: deepseek-v4-flash
+  approval:
+    provider: deepseek
+    model: deepseek-v4-flash
+  mcp:
+    provider: deepseek
+    model: deepseek-v4-flash
+mcp_servers:
+  grafana:
+    enabled: true
+    command: mcp-grafana
+    env:
+      GRAFANA_URL: ${GRAFANA_URL}
+      GRAFANA_SERVICE_ACCOUNT_TOKEN: ${GRAFANA_SERVICE_ACCOUNT_TOKEN}
+      MCP_GRAFANA_API_KEY: ${MCP_GRAFANA_API_KEY}
+    tools:
+      include:
+        - search_dashboards
+        - get_dashboard_summary
+        - get_dashboard_by_uid
+        - get_dashboard_property
+        - get_dashboard_panel_queries
+        - update_dashboard
+        - generate_deeplink
+        - list_datasources
+        - get_datasource
+        - grafana_api_request
+      resources: false
+      prompts: false
+onboarding:
+  seen:
+    tool_progress_prompt: true
+    busy_input_prompt: true
+approvals:
+  destructive_slash_confirm: false

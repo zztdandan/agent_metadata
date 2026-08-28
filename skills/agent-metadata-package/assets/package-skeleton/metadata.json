@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "0.1",
+  "package": {
+    "id": "example-agent-metadata",
+    "version": "0.1.0",
+    "name": "Example Agent Metadata",
+    "description": "替换为包说明"
+  },
+  "capabilities": [
+    {
+      "id": "example-agent",
+      "path": "capabilities/example-agent"
+    }
+  ],
+  "bootstrap": "BOOTSTRAP.md",
+  "distribution": {
+    "exclude": [
+      "dist/**",
+      "**/.env",
+      "**/sessions/**",
+      "**/logs/**",
+      "**/state.db*"
+    ]
+  }
+}

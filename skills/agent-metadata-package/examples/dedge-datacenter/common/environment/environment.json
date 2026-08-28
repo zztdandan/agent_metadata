@@ -1,0 +1,110 @@
+{
+  "variables": [
+    {
+      "name": "GRAFANA_URL",
+      "kind": "url",
+      "required": true,
+      "description": "Grafana 服务地址",
+      "example": "http://127.0.0.1:3000",
+      "consumers": ["mcp.grafana", "workspace.tsdb-memory"]
+    },
+    {
+      "name": "GRAFANA_SERVICE_ACCOUNT_TOKEN",
+      "kind": "secret",
+      "required": true,
+      "description": "Grafana Service Account Token",
+      "consumers": ["mcp.grafana", "workspace.tsdb-memory"]
+    },
+    {
+      "name": "MCP_GRAFANA_API_KEY",
+      "kind": "secret",
+      "required": true,
+      "description": "Grafana MCP 服务凭证",
+      "consumers": ["mcp.grafana"]
+    },
+    {
+      "name": "DEDGE_AGENT_MEMORY_PATH",
+      "kind": "path",
+      "required": false,
+      "description": "项目外接 agent memory 文件路径；未设置时使用项目约定相对路径",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "CLOUD_URL",
+      "kind": "url",
+      "required": false,
+      "description": "Cloud 服务地址",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "CLOUD_USERNAME",
+      "kind": "string",
+      "required": false,
+      "description": "Cloud 登录用户名",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "CLOUD_PASSWORD",
+      "kind": "secret",
+      "required": false,
+      "description": "Cloud 登录密码",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "GRAFANA_PUBLIC_DASHBOARD_BASE_URL",
+      "kind": "url",
+      "required": false,
+      "description": "Grafana public dashboard 基础地址",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "BACKEND_BASE_URL",
+      "kind": "url",
+      "required": false,
+      "description": "项目后端地址",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "BACKEND_NOTIFY_FRONTEND_REFRESH_URL",
+      "kind": "url",
+      "required": false,
+      "description": "后端前端刷新通知地址",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "TSS_BASE_URL",
+      "kind": "url",
+      "required": false,
+      "description": "TSS 服务地址",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "TSS_DOCKER_REACHABLE_URL",
+      "kind": "url",
+      "required": false,
+      "description": "容器可达的 TSS 地址",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "TSS_QUERY_BASE_URL",
+      "kind": "url",
+      "required": false,
+      "description": "TSS 查询 API 地址",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "TSS_USERNAME",
+      "kind": "string",
+      "required": false,
+      "description": "TSS 登录用户名",
+      "consumers": ["workspace.tsdb-memory"]
+    },
+    {
+      "name": "TSS_PASSWORD",
+      "kind": "secret",
+      "required": false,
+      "description": "TSS 登录密码",
+      "consumers": ["workspace.tsdb-memory"]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "memoryType": "datacenter-agent-memory",
+  "agent": "datacenter-agent",
+  "cloud": {
+    "url": "${CLOUD_URL}",
+    "auth": {"username": "{{CLOUD_USERNAME}}", "password": "{{CLOUD_PASSWORD}}"},
+    "permissions": "unrestricted"
+  },
+  "grafana": {
+    "url": "${GRAFANA_URL}",
+    "publicDashboardBaseUrl": "${GRAFANA_PUBLIC_DASHBOARD_BASE_URL}",
+    "auth": {"token": "${GRAFANA_SERVICE_ACCOUNT_TOKEN}"},
+    "permissions": "unrestricted"
+  },
+  "backend": {
+    "url": "${BACKEND_BASE_URL}",
+    "notifyFrontendRefreshUrl": "${BACKEND_NOTIFY_FRONTEND_REFRESH_URL}",
+    "permissions": "unrestricted"
+  },
+  "frontend": {"url": "${FRONTEND_BASE_URL}", "permissions": "unrestricted"},
+  "tss": {
+    "url": "${TSS_BASE_URL}",
+    "dockerReachableUrl": "${TSS_DOCKER_REACHABLE_URL}",
+    "queryBaseUrl": "${TSS_QUERY_BASE_URL}",
+    "auth": {"username": "{{TSS_USERNAME}}", "password": "{{TSS_PASSWORD}}"},
+    "permissions": "unrestricted"
+  },
+  "tsdbs": [],
+  "tsdbMemoryRule": "发现即记录，变化即更新（以 tdsCode 为准）"
+}
