@@ -31,13 +31,14 @@ agent_metadata/
 │   └── AGENTS.md
 ├── adapters/<agent-id>/
 │   ├── README.md
-│   └── examples/
-├── helpers/                       # 可选辅助工具，不登记
-├── evaluations/                   # 验证用例，不登记
+│   ├── examples/
+│   ├── helpers/                   # 该宿主专用的辅助脚本（可选，不登记）
+│   └── implementation/           # 集成实现源码和构建配置（可选，不登记）
+├── evaluations/                   # 可重复验证用例，不登记
 └── dist/                          # 测试沙箱，正式发布时排空
 ```
 
-最小合法包必须包含根 `metadata.json`、`README.md`、`BOOTSTRAP.md`、`schema/metadata.schema.json`，以及至少一个含四个文件的能力域目录。`LICENSE`、`common/`、`adapters/`、`helpers/`、`evaluations/` 和 `dist/` 可选；发布或分发包时应提供 `LICENSE`。
+最小合法包必须包含根 `metadata.json`、`README.md`、`BOOTSTRAP.md`、`schema/metadata.schema.json`，以及至少一个含四个文件的能力域目录。`LICENSE`、`common/`、`adapters/`、`evaluations/` 和 `dist/` 可选；发布或分发包时应提供 `LICENSE`。
 
 ## 根 metadata.json
 
@@ -126,8 +127,8 @@ Adapter 状态可为：`verified`（已在真实版本验证）、`experimental`
 | 环境契约 | `common/environment/` | 根 + 子清单 | 引用变量名，不保存真实值。 |
 | 工作区资产 | `common/workspace/<asset-name>/` | 根 + 子清单 | 目录名即资产 ID，登记该目录表示需要这份资产；将其**目录内容**复制到目标工作区根目录。目标中同路径内容已存在且不同则报告冲突。 |
 | 通用参考 | `common/references/` | 不登记 | 只读，不部署。 |
-| Adapter 知识 | `adapters/<id>/` | 根清单 | 只读；以实际宿主行为为准。 |
-| helpers / evaluations / dist | 各自目录 | 不登记 | 分别用于可选辅助、验证和测试。 |
+| Adapter | `adapters/<id>/` | 根清单 | 宿主适配参考与宿主专用实现；含 README、examples、helpers、implementation 等内部目录。 |
+| evaluations / dist | 各自目录 | 不登记 | evaluations 存放可重复验证用例；dist 用于测试沙箱。 |
 
 技能的 `SKILL.md` 应带有 `name` 和 `description` 的 YAML frontmatter；`name` 与根清单的技能 ID 保持一致。技能中的脚本属于技能私有内容。安装时可提示来源和路径，但不得静默执行业务脚本。
 
@@ -157,9 +158,8 @@ MCP 文件保存逻辑需求，例如命令、环境变量映射和工具白名�
 | `schema/metadata.schema.json` | `metadata.json` 的 JSON Schema；最小合法包必需。             |
 | `common/`                     | 多个能力域共享的框架无关资产。                                    |
 | `capabilities/`               | 能力域目录；每个目录存身份文件和子清单。                               |
-| `adapters/`                   | 已知宿主的适配知识与脱敏示例；不是安装模板。                             |
-| `helpers/`                    | 可选辅助工具；不在 `metadata.json` 登记。                      |
-| `evaluations/`                | 验证用例；不在 `metadata.json` 登记。                        |
+| `adapters/`                   | 已知宿主的适配知识与宿主专用实现；可含 README、examples、helpers、implementation 等内部目录。不是安装模板。 |
+| `evaluations/`                | 可重复验证用例；不在 `metadata.json` 登记。                        |
 | `dist/`                       | 自举测试沙箱；不属于 canonical 资产。                           |
 
 
@@ -192,7 +192,7 @@ MCP 文件保存逻辑需求，例如命令、环境变量映射和工具白名�
 
 子清单中的 `capabilityId` 为必填字符串，且必须等于根清单中登记的能力域 ID。`skills`、`mcp`、`workspaceAssets` 和 `environment` 都是可选的字符串数组；前三者引用根清单 ID，最后一个引用 `environment.json` 中的变量名。
 
-不得在清单中登记 helpers、Adapter 内具体配置片段、真实 Secret、用户绝对路径、宿主专有配置、运行状态或技能内部文件清单。技能以整个目录作为黑盒搬运单元。
+不得在清单中登记 helpers（Adapter 内部）、evaluations、Adapter 内具体配置片段、真实 Secret、用户绝对路径、宿主专有配置、运行状态或技能内部文件清单。技能以整个目录作为黑盒搬运单元。
 
 ### 参数与环境变量引用
 

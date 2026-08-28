@@ -22,8 +22,8 @@ description: 当用户要创建、维护、审查或发布框架无关的智能�
 
 先区分 canonical 资产和宿主派生产物：
 
-- **进入包**：能力域身份与规程、完整技能目录、MCP 逻辑需求、环境变量契约、可迁移的工作区种子资产、Adapter 知识、验证用例。
-- **不进入包**：宿主最终配置、真实凭证、会话/日志/缓存/数据库状态、用户绝对路径、安装器、插件实现和一次性部署产物。
+- **进入包**：能力域身份与规程、完整技能目录、MCP 逻辑需求、环境变量契约、可迁移的工作区种子资产、Adapter 适配知识与宿主专用实现、可重复的验证用例。
+- **不进入包**：宿主最终配置、真实凭证、会话/日志/缓存/数据库状态、用户绝对路径、一次性评估产出、构建产物和运行状态。
 
 若用户要将包部署到 Hermes、OpenCode 或其他宿主，停止在编制完成状态；请其读取包根 `BOOTSTRAP.md`，并以目标宿主的当前文档和实际行为完成自举。
 
@@ -65,7 +65,9 @@ AGENTS.md
 
 ### 4. 写 Adapter（仅在确有已知宿主经验时）
 
-Adapter 放在 `adapters/<agent-id>/`，是**脱敏的适配知识**，不是安装脚本或可直接覆盖的宿主配置。它至少应说明：验证版本/状态、能力域映射、技能发现、MCP 映射、环境变量加载、建议工作区位置、原生验证方法和已知限制。
+Adapter 放在 `adapters/<agent-id>/`，是为了让元数据包在该宿主上集成而需要的全部宿主专用内容。它可以携带说明、脱敏配置示例、集成实现源码、构建配置和辅助脚本——只要该内容仅为该宿主的集成服务。例如：OpenCode 若采用插件模式，Adapter 说明如何基于公共资产制作插件；Hermes 可能需要示例的 config 裁剪能力、技能裁剪能力以及 `.env.example`。
+
+Adapter 至少应说明：验证版本/状态、能力域映射、技能发现、MCP 映射、环境变量加载、建议工作区位置、原生验证方法和已知限制。其中的实现源码、构建配置和辅助脚本不自动执行；它们是参考或可选实现，不是安装脚本。
 
 Adapter 未经真实验证时，根清单状态应为 `experimental` 或 `research_required`，不能写成 `verified`。详细边界见 `references/adapters-and-host-boundaries.md`。
 
@@ -93,7 +95,7 @@ Adapter 未经真实验证时，根清单状态应为 `experimental` 或 `resear
 - 需要目录、字段、命名和引用规则：读 `references/package-structure-and-manifest.md`。
 - 需要判断 capability、skill、MCP、workspace asset 的归属和组合：读 `references/capability-and-asset-model.md`。
 - 需要环境变量、`${...}`、`{{...}}`、Secret 或 MCP：读 `references/environment-mcp-and-security.md`。
-- 需要 Hermes/OpenCode 或其他宿主适配知识：读 `references/adapters-and-host-boundaries.md`。
+- 需要 Hermes/OpenCode 或其他宿主适配知识（含 Adapter 内部 helpers 和实现源码）：读 `references/adapters-and-host-boundaries.md`。
 - 需要发布、校验、验收报告：读 `references/release-and-static-validation.md`。
 
 ## 示例

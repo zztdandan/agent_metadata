@@ -18,7 +18,7 @@
 
 ## 发布内容与排除规则
 
-发布包应包含根级文件、`common/`、`capabilities/`，以及实际提供的 `adapters/`、`helpers/`、`evaluations/` 和 `schema/`。保留 `dist/.gitignore` 和 `dist/README.md`，但不带任何测试产物。
+发布包应包含根级文件、`common/`、`capabilities/`，以及实际提供的 `adapters/`（含其内部 helpers 和 implementation 等目录）、`evaluations/`（只含验证定义和最小夹具，不含一次性评估结果）和 `schema/`。保留 `dist/.gitignore` 和 `dist/README.md`，但不带任何测试产物。
 
 根清单可声明排除规则：
 
@@ -72,7 +72,9 @@
 
 ## 验证用例与报告
 
-`evaluations/` 可以按能力域发现、技能发现、MCP 连通性和工作区资产分目录存放用例。每个用例写清验证目标、前置条件、执行步骤、预期结果和脱敏要求。
+`evaluations/` 是可选的迁移验收契约。只有当某项能力存在可重复的安装后发现、加载、连接、运行或边界验证时才需要提供。它存放验证定义及其最小测试夹具，不存放一次性评估结果。评估执行结果应由部署方或 CI 在包外产生；如需随包提供结果，只能提供脱敏、可复核、明确标注版本和环境的参考报告。
+
+可以按能力域发现、技能发现、MCP 连通性和工作区资产分目录存放用例。每个用例写清验证目标、前置条件、执行步骤、预期结果和脱敏要求。
 
 报告应明确包版本、能力域、目标宿主、四层结果、未完成项和降级情况。环境变量只显示状态，例如：
 
@@ -134,7 +136,7 @@ node_modules/
 
 `distribution.exclude` 中每项的含义：`dist/**` 排除测试沙箱；`**/.env` 排除凭证；`**/sessions/**`、`**/logs/**`、`**/state.db*` 排除运行状态；`**/__pycache__/**`、`**/node_modules/**` 和 `**/.DS_Store` 排除构建依赖或系统文件。
 
-发布归档应包含 `common/`、`capabilities/`、现有的 `adapters/`、`helpers/`、`evaluations/`、`schema/` 和根级文件，以及 `dist/.gitignore`、`dist/README.md`；不含 `dist/` 产物、`.env`、运行状态或未明确要求的 Git 元数据。
+发布归档应包含 `common/`、`capabilities/`、现有的 `adapters/`（含其内部 helpers 和 implementation 等目录）、`evaluations/`（只含验证定义和最小夹具）、`schema/` 和根级文件，以及 `dist/.gitignore`、`dist/README.md`；不含 `dist/` 产物、`.env`、运行状态或未明确要求的 Git 元数据。
 
 ## 术语速查
 

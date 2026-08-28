@@ -49,4 +49,4 @@ JSON 格式 → JSON Schema → 根/子清单交叉引用 → 路径与 ID → �
 
 ## 归档
 
-建议格式为 `<package-id>-<package-version>.tar.gz` 或 `.zip`。归档应包含 canonical 根级文件、`common/`、`capabilities/`、实际提供的 `adapters/`、`helpers/`、`evaluations/`、`schema/`，以及空的 `dist/` 说明文件；不得包含测试产物或未声明的运行时内容。
+建议格式为 `<package-id>-<package-version>.tar.gz` 或 `.zip`。归档应包含 canonical 根级文件、`common/`、`capabilities/`、实际提供的 `adapters/`（含其内部 helpers 和 implementation 等目录）、`evaluations/`（只含验证定义和最小夹具，不含一次性评估结果）、`schema/`，以及空的 `dist/` 说明文件；不得包含测试产物或未声明的运行时内容。

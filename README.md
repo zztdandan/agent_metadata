@@ -30,9 +30,8 @@ agent_metadata/
 │   ├── workspace/<asset-name>/     # 工作区资产
 │   └── references/                 # 只读参考资料
 ├── capabilities/<capability-id>/   # 能力域：SOUL + USER + AGENTS + 子清单
-├── adapters/<agent-id>/            # 已知宿主适配知识
-├── helpers/                        # 可选辅助工具（不登记）
-├── evaluations/                    # 验证用例（不登记）
+├── adapters/<agent-id>/            # 宿主适配知识与宿主专用实现
+├── evaluations/                    # 可重复验证用例（不登记）
 └── dist/                           # 测试沙箱（不发布）
 ```
 
@@ -113,7 +112,7 @@ HERMES_HOME=./dist/hermes-test hermes chat -q "读取 metadata.json，列出可�
 1. 先定义能力域及其 `SOUL.md`、`USER.md`、`AGENTS.md`。
 2. 将共享技能、MCP、环境契约和工作区资产放进 `common/`，在根清单登记。
 3. 用能力域子清单引用需要的资产。
-4. 写 Adapter 知识和验证用例，再在测试沙箱中验证。
+4. 写 Adapter 和验证用例，再在测试沙箱中验证。
 5. 清空 `dist/`，运行发布前检查后再归档。
 
 ## 状态

@@ -28,8 +28,8 @@ capabilities/<capability-id>/
 | 环境契约 | `common/environment/` | 是（整体） | capability 子清单引用变量名。 |
 | 工作区资产 | `common/workspace/<asset-id>/` | 是 | capability 子清单引用资产 ID。 |
 | 通用参考 | `common/references/` | 否 | 只读，不部署。 |
-| Adapter 知识 | `adapters/<agent-id>/` | 是 | 宿主适配参考。 |
-| helpers、evaluations、dist | 各自目录 | 否 | 辅助、验证与测试。 |
+| Adapter | `adapters/<agent-id>/` | 是 | 宿主适配参考与宿主专用实现；含 README、examples、helpers、implementation 等内部目录。 |
+| evaluations、dist | 各自目录 | 否 | 分别用于可重复验证用例和测试沙箱。 |
 
 ## 多对多组合
 

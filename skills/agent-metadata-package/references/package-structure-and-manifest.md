@@ -17,7 +17,7 @@
     └── AGENTS.md
 ```
 
-`common/`、`adapters/`、`helpers/`、`evaluations/` 和 `dist/` 按需添加。正式分发时应提供许可证。
+`common/`、`adapters/`、`evaluations/` 和 `dist/` 按需添加。正式分发时应提供许可证。
 
 ## 完整布局
 
@@ -36,7 +36,6 @@
 │   └── references/
 ├── capabilities/<capability-id>/
 ├── adapters/<agent-id>/
-├── helpers/
 ├── evaluations/
 └── dist/
 ```
@@ -114,4 +113,4 @@ Adapter 状态为 `verified`、`experimental`、`research_required` 或 `unsuppo
 - 能力域文件固定为 `SOUL.md`、`USER.md`、`AGENTS.md` 和 `metadata.json`。
 - 技能入口固定为 `SKILL.md`，并带 `name`、`description` YAML frontmatter；`name` 必须等于根清单 skill ID。
 - 路径必须相对包根，不得含绝对路径或 `..`。
-- `helpers/`、`evaluations/`、Adapter 内部文件和技能内部文件清单不登记进 `metadata.json`。
+- `evaluations/`、Adapter 内部文件（含 helpers、implementation 等）和技能内部文件清单不登记进 `metadata.json`。
