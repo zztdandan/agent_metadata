@@ -4,9 +4,9 @@
 
 ## 发布前清单
 
-1. `README.md`、`BOOTSTRAP.md`、根 `metadata.json`、`schema/metadata.schema.json` 和至少一个完整 capability 存在。
-2. 根 `metadata.json` 通过 Schema 校验。
-3. 所有 capability 子清单的 skill、MCP、workspace asset ID 已在根清单登记。
+1. `README.md`、`BOOTSTRAP.md`、根 `package-metadata.json`、两份 Schema 及至少一个完整 capability 存在。
+2. 根 `package-metadata.json` 通过 `schema/package-metadata.schema.json`，每个 `capability-metadata.json` 通过 `schema/capability-metadata.schema.json`。
+3. 所有 capability 子清单的 `capabilityId`、skill、MCP、workspace asset ID 已在根清单登记。
 4. 所有 capability 子清单环境变量、MCP `${...}` 和模板 `{{...}}` 已在 `environment.json` 声明。
 5. ID 无重复；路径均在包根内，不含绝对路径或 `..`。
 6. 每个根清单 skill 路径存在且有 `SKILL.md`；其 frontmatter `name` 与 skill ID 一致。

@@ -1,17 +1,17 @@
 # 包结构与元数据
 
-本页定义 `agent_metadata` 的目录布局、根与能力域子 `metadata.json`，以及资产的注册方式。它回答两个问题：包里应放什么，智能体如何找到它。
+本页定义 `agent_metadata` 的目录布局、根 `package-metadata.json` 与能力域 `capability-metadata.json`，以及资产的注册方式。它回答两个问题：包里应放什么，智能体如何找到它。
 
 ## 目录布局
 
 ```text
 agent_metadata/
-├── metadata.json                 # 根清单
+├── package-metadata.json                 # 根清单
 ├── README.md                      # 人类入口
 ├── BOOTSTRAP.md                   # 面向自举智能体的规约
 ├── LICENSE                       # 可选：发布或分发时应提供
 ├── schema/
-│   └── metadata.schema.json       # 必需：根清单的 JSON Schema
+│   └── package-metadata.schema.json       # 必需：根清单的 JSON Schema
 ├── common/
 │   ├── skills/<skill-id>/         # 完整技能目录
 │   │   ├── SKILL.md
@@ -25,7 +25,7 @@ agent_metadata/
 │   ├── workspace/<asset-name>/    # 一个资产一个目录；目录内容复制到工作区根目录
 │   └── references/                # 只读参考资料
 ├── capabilities/<capability-id>/
-│   ├── metadata.json              # 能力域子清单
+│   ├── capability-metadata.json              # 能力域子清单
 │   ├── SOUL.md
 │   ├── USER.md
 │   └── AGENTS.md
@@ -38,18 +38,20 @@ agent_metadata/
 └── dist/                          # 测试沙箱，正式发布时排空
 ```
 
-最小合法包必须包含根 `metadata.json`、`README.md`、`BOOTSTRAP.md`、`schema/metadata.schema.json`，以及至少一个含四个文件的能力域目录。`LICENSE`、`common/`、`adapters/`、`evaluations/` 和 `dist/` 可选；发布或分发包时应提供 `LICENSE`。
+最小合法包必须包含根 `package-metadata.json`、`README.md`、`BOOTSTRAP.md`、`schema/package-metadata.schema.json`，以及至少一个含四个文件的能力域目录。`LICENSE`、`common/`、`adapters/`、`evaluations/` 和 `dist/` 可选；发布或分发包时应提供 `LICENSE`。
 
-## 根 metadata.json
+## 根 package-metadata.json
 
 根清单描述包的全貌：包身份、能力域、共享资产、可参考的 Adapter 和发布排除规则。
 
 ```json
 {
-  "schemaVersion": "0.1",
+  "$schema": "schema/package-metadata.schema.json",
+  "kind": "agent-metadata-package",
+  "schemaVersion": "0.2",
   "package": {
     "id": "dedge-agent-metadata",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "name": "Dedge Agent Metadata",
     "description": "dedge 组织智能体元数据包"
   },
@@ -81,7 +83,8 @@ agent_metadata/
 
 | 字段 | 要求 | 含义 |
 |---|---|---|
-| `schemaVersion` | 必填，字符串 | 元数据协议版本；当前为 `"0.1"`。 |
+| `$schema` / `kind` | 必填，字符串 | 分别指向根 Schema，并固定为 `agent-metadata-package`，使文件可自描述。 |
+| `schemaVersion` | 必填，字符串 | 元数据协议版本；当前为 `"0.2"`。 |
 | `package` | 必填，对象 | 包的 `id`、内容版本，以及可选名称和说明。`id` 用小写连字符；`version` 用语义化版本。 |
 | `capabilities` | 必填，至少一项 | 能力域 ID 与相对目录。 |
 | `skills` / `mcp` | 可选，数组 | 共享资产 ID 与相对路径。技能以完整目录、MCP 以声明文件为单位。 |
@@ -93,17 +96,20 @@ agent_metadata/
 
 Adapter 状态可为：`verified`（已在真实版本验证）、`experimental`（有资料但验证不足）、`research_required`（仅占位，需现场研究）和 `unsupported`（已知不支持）。
 
-## 能力域与子 metadata.json
+## 能力域与 capability-metadata.json
 
 能力域说明“这个专家是谁、遵守什么规则、需要哪些资产”，不拥有技能或工作区资产。它包含：
 
 - `SOUL.md`：身份、使命、价值取舍和硬性边界；应保持简短，不应写成技能手册。
 - `USER.md`：用户画像、协作偏好和交互约定。
 - `AGENTS.md`：可迁移的能力说明/工作目录指令资产，描述当前能力域在实际工作目录中应长期遵守的项目事实、目录边界、读写限制、持久化位置与运行约束。它不是技能逐步工作流程；具体任务流程属于按需加载的 Skill。作为 canonical 资产，它只描述能力本身；自举时将它复制到哪个宿主文件或目录、以及如何映射，是 `BOOTSTRAP.md` 和 Adapter 的职责，不写入此文件。
-- `metadata.json`：引用本能力域所需资产。
+- `capability-metadata.json`：引用本能力域所需资产。
 
 ```json
 {
+  "$schema": "../../schema/capability-metadata.schema.json",
+  "kind": "agent-capability",
+  "schemaVersion": "0.2",
   "capabilityId": "datacenter-agent",
   "skills": ["datacenter-agent-runtime", "datacenter-agent-grafana-dashboard"],
   "mcp": ["grafana"],
@@ -112,7 +118,9 @@ Adapter 状态可为：`verified`（已在真实版本验证）、`experimental`
 }
 ```
 
-子清单中的每个技能、MCP 和工作区资产 ID 都必须已在根清单登记；`environment` 中的变量必须已在 `environment.json` 声明。缺少引用时应停止自举并报告问题。
+`capability-metadata.json` 只表达能力域对共享资产的选择；不得重复登记共享资产路径、MCP 传输配置、Secret 或 Adapter 细节。子清单中的每个技能、MCP 和工作区资产 ID 都必须已在根清单登记；`environment` 中的变量必须已在 `environment.json` 声明。缺少引用时应停止自举并报告问题。
+
+`schema/package-metadata.schema.json` 与 `schema/capability-metadata.schema.json` 分别校验单个文件的结构；跨文件静态校验器必须校验 capability ID、资产 ID、环境变量引用、路径存在性与引用闭合。JSON Schema 不替代这一步。
 
 不同宿主可把能力域表达成独立 Agent、单一入口内的组合规则、preset 或项目指令文件。`AGENTS.md` 是只描述能力本身的 canonical 文件；它在目标宿主中具体复制到哪个 Agent 说明文件或项目工作目录、如何与其他身份资产合并，由 `BOOTSTRAP.md` 和 Adapter 根据当前宿主决定。若宿主不能分开加载 SOUL、USER 和 AGENTS，应按语义合并：先放身份与边界，再放能力的工作目录约束，最后放用户协作约定。不得把三份文件直接首尾拼接。
 
@@ -134,12 +142,12 @@ Adapter 状态可为：`verified`（已在真实版本验证）、`experimental`
 
 工作区资产只登记到文件夹级别，且 `common/workspace/<asset-name>/` 的目录名就是资产 ID（例如 `common/workspace/tsdb-memory/` 对应 `tsdb-memory`）。登记该目录表示选择整份资产；部署时复制其**内容**到目标工作区根目录，而不是将资产目录本身再嵌套一层复制过去。复制后持续变化的资产（例如现场 memory）归项目管理，升级和卸载均不得静默覆盖或删除。
 
-MCP 文件保存逻辑需求，例如命令、环境变量映射和工具白名单，而不是 Hermes、OpenCode 等宿主的原始配置片段。真实 Secret、绝对路径、运行状态、技能内部文件列表和宿主专有配置均不得登记进 `metadata.json`。
+MCP 文件保存逻辑需求，例如命令、环境变量映射和工具白名单，而不是 Hermes、OpenCode 等宿主的原始配置片段。真实 Secret、绝对路径、运行状态、技能内部文件列表和宿主专有配置均不得登记进 `package-metadata.json`。
 
 ## 文件与目录命名
 
 - ID 用小写连字符：`datacenter-agent`、`iot-stream-processor`、`grafana`。
-- 根和子清单都叫 `metadata.json`。
+- 根清单使用 `package-metadata.json`，能力域子清单使用 `capability-metadata.json`。
 - 能力域文件固定为 `SOUL.md`、`USER.md`、`AGENTS.md`。
 - 技能入口固定为 `SKILL.md`，人类入口固定为 `README.md`。
 
@@ -151,15 +159,16 @@ MCP 文件保存逻辑需求，例如命令、环境变量映射和工具白名�
 
 | 位置                            | 用途                                                 |
 | ----------------------------- | -------------------------------------------------- |
-| `metadata.json`               | 机器可读根清单；自举智能体首先读取它，了解包身份、能力域、共享资产、Adapter 和发布排除规则。 |
+| `package-metadata.json`               | 机器可读根清单；自举智能体首先读取它，了解包身份、能力域、共享资产、Adapter 和发布排除规则。 |
 | `README.md`                   | 给维护者和使用者看的入口、文档索引和阅读路径。                            |
 | `BOOTSTRAP.md`                | 给自举智能体看的结果规约；规定必须达到的结果和安全边界，不固定工具或命令。              |
 | `LICENSE`                     | 可选；发布或分发时说明资产的使用、修改和分发许可。                         |
-| `schema/metadata.schema.json` | `metadata.json` 的 JSON Schema；最小合法包必需。             |
+| `schema/package-metadata.schema.json` | `package-metadata.json` 的 JSON Schema；最小合法包必需。 |
+| `schema/capability-metadata.schema.json` | `capability-metadata.json` 的 JSON Schema；最小合法包必需。 |
 | `common/`                     | 多个能力域共享的框架无关资产。                                    |
 | `capabilities/`               | 能力域目录；每个目录存身份文件和子清单。                               |
 | `adapters/`                   | 已知宿主的适配知识与宿主专用实现；可含 README、examples、helpers、implementation 等内部目录。不是安装模板。 |
-| `evaluations/`                | 可重复验证用例；不在 `metadata.json` 登记。                        |
+| `evaluations/`                | 可重复验证用例；不在 `package-metadata.json` 登记。                        |
 | `dist/`                       | 自举测试沙箱；不属于 canonical 资产。                           |
 
 
@@ -169,16 +178,17 @@ MCP 文件保存逻辑需求，例如命令、环境变量映射和工具白名�
 
 - 能力域、技能和 MCP ID 使用小写连字符，例如 `datacenter-agent`、`iot-stream-processor`、`grafana`。
 - 工作区资产按资产目录组织，目录名即资产 ID，例如 `tsdb-memory/`、`catalog/`；每个资产目录的内容落到目标工作区根目录。
-- 固定文件名为 `metadata.json`、`SOUL.md`、`USER.md`、`AGENTS.md`、`SKILL.md`、`README.md` 和 `BOOTSTRAP.md`。
+- 固定文件名为 `package-metadata.json`、`capability-metadata.json`、`SOUL.md`、`USER.md`、`AGENTS.md`、`SKILL.md`、`README.md` 和 `BOOTSTRAP.md`。
 
 ## 根与子清单的字段细节
 
-### 根 metadata.json
+### 根 package-metadata.json
 
 
 | 字段                | 类型 / 是否必填               | 规则                                                                 |
 | ----------------- | ----------------------- | ------------------------------------------------------------------ |
-| `schemaVersion`   | `string`，必填             | 元数据协议版本；当前为 `"0.1"`，与资产版本独立。                                       |
+| `$schema` / `kind` | `string`，必填 | 分别指向根 Schema，且 `kind` 固定为 `agent-metadata-package`。 |
+| `schemaVersion`   | `string`，必填             | 元数据协议版本；当前为 `"0.2"`，与资产版本独立。                                       |
 | `package`         | `object`，必填             | `id`（必填，小写连字符）、`version`（必填，语义化版本）、`name` 和 `description`（可选）。     |
 | `capabilities`    | `array<object>`，必填且至少一项 | 每项含必填的 `id` 和 `path`；根清单不展开能力域内部资产。                                |
 | `skills`          | `array<object>`，可选      | 每项含必填的 `id` 和技能目录 `path`。                                          |

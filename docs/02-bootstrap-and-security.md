@@ -6,7 +6,7 @@
 
 ### 1. 先理解包
 
-读取根 `README.md`、`metadata.json` 和 `BOOTSTRAP.md`，列出能力域、技能、MCP、环境变量、工作区资产和可用 Adapter。不得在完成理解前复制文件，也不得假定 Adapter 文档永远与包内容或当前版本一致。
+读取根 `README.md`、`package-metadata.json` 和 `BOOTSTRAP.md`，列出能力域、技能、MCP、环境变量、工作区资产和可用 Adapter。不得在完成理解前复制文件，也不得假定 Adapter 文档永远与包内容或当前版本一致。
 
 ### 2. 识别当前宿主
 
@@ -86,7 +86,7 @@ Adapter 至少应说明：已验证版本、能力域映射、技能发现路径
 
 `helpers/` 是 Adapter 的内部目录，不是包级顶层目录。并非每个宿主都可以运行脚本或网络配置某个东西，因此辅助脚本归属于它服务的特定 Adapter。如果某个辅助工具对多个宿主通用，说明它应提升为 `common/` 下的共享资产或技能，而不是放在某个 Adapter 中。
 
-Adapter 内部的 helpers 不登记在 `metadata.json`。智能体使用前应检查脚本是否适合当前系统、宿主、字段集合和写入目标，再决定使用、改造或绕过。
+Adapter 内部的 helpers 不登记在 `package-metadata.json`。智能体使用前应检查脚本是否适合当前系统、宿主、字段集合和写入目标，再决定使用、改造或绕过。
 
 ## 禁止事项
 
@@ -242,7 +242,7 @@ common/workspace/
 - Adapter 与 `BOOTSTRAP.md` 冲突时，后者的安全边界优先。
 - Adapter 中的实现源码、构建配置和辅助脚本不自动执行；不得包含真实凭证、机器绝对路径或未来版本承诺。
 
-`helpers/` 是 Adapter 的内部目录，不是包级顶层目录。Adapter 内部的 helpers 不登记在 `metadata.json`。如果某个辅助工具对多个宿主通用，说明它应提升为 `common/` 下的共享资产或技能。
+`helpers/` 是 Adapter 的内部目录，不是包级顶层目录。Adapter 内部的 helpers 不登记在 `package-metadata.json`。如果某个辅助工具对多个宿主通用，说明它应提升为 `common/` 下的共享资产或技能。
 
 ### 交付、升级与验证细节
 

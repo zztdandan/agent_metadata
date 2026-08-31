@@ -25,7 +25,7 @@
 ## 自举的基本路径
 
 ```text
-读取 README、metadata.json 和 BOOTSTRAP.md
+读取 README、package-metadata.json 和 BOOTSTRAP.md
     ↓
 识别当前宿主及其实际能力
     ↓

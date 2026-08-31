@@ -58,7 +58,7 @@ Adapter 可带脱敏配置片段，但不能包含真实值、用户绝对路径
 
 `helpers/` 是 Adapter 内部目录，不是包级顶层目录。并非每个宿主都可以运行脚本或网络配置某个东西，因此辅助脚本归属于它服务的特定 Adapter。如果某个 helper 对多个宿主通用，说明它应提升为 `common/` 下的共享资产或技能，而不是放在某个 Adapter 中。
 
-Adapter 内部的 helpers 不登记在 `metadata.json`。智能体使用前应检查脚本是否适合当前系统、宿主、字段集合和写入目标。
+Adapter 内部的 helpers 不登记在 `package-metadata.json`。智能体使用前应检查脚本是否适合当前系统、宿主、字段集合和写入目标。
 
 ## Hermes 示例边界
 

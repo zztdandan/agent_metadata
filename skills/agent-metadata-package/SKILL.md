@@ -1,6 +1,6 @@
 ---
 name: agent-metadata-package
-description: 当用户要创建、维护、审查或发布框架无关的智能体元数据包时使用。该技能将身份能力域、可迁移技能、MCP 逻辑需求、环境契约、工作区资产和宿主 Adapter 组织为 canonical 包；遇到新建或修改 metadata.json、capabilities、common/skills、common/mcp、workspace assets、Adapter 或发布检查时都应使用。
+description: 当用户要创建、维护、审查或发布框架无关的智能体元数据包时使用。该技能将身份能力域、可迁移技能、MCP 逻辑需求、环境契约、工作区资产和宿主 Adapter 组织为 canonical 包；遇到新建或修改 package-metadata.json、capabilities、common/skills、common/mcp、workspace assets、Adapter 或发布检查时都应使用。
 ---
 
 # 智能体元数据包编制
@@ -12,7 +12,7 @@ description: 当用户要创建、维护、审查或发布框架无关的智能�
 交付的包应满足：
 
 1. 根清单、能力域子清单和环境契约的引用闭合。
-2. 每个能力域都有 `SOUL.md`、`USER.md`、`AGENTS.md` 和子 `metadata.json`。
+2. 每个能力域都有 `SOUL.md`、`USER.md`、`AGENTS.md` 和 `capability-metadata.json`。
 3. 技能按完整目录提供；MCP 是框架无关的逻辑声明；工作区资产按目录提供。
 4. 包内没有 Secret、真实 Token、密码、用户绝对路径或运行状态。
 5. `BOOTSTRAP.md` 说明自举目标、安全边界与验收要求，但不绑定固定安装器。
@@ -31,7 +31,7 @@ description: 当用户要创建、维护、审查或发布框架无关的智能�
 
 ### 1. 建立或读取包地图
 
-1. 读取包的 `README.md`、根 `metadata.json`、`BOOTSTRAP.md`，以及已有能力域和共享资产。
+1. 读取包的 `README.md`、根 `package-metadata.json`、`BOOTSTRAP.md`，以及已有能力域和共享资产。
 2. 先列出能力域、共享技能、MCP、环境变量、工作区资产和 Adapter 的 ID；再开始编辑。
 3. 新包以 `assets/package-skeleton/` 为基础。字段和目录细节见 `references/package-structure-and-manifest.md`。
 
@@ -40,7 +40,7 @@ description: 当用户要创建、维护、审查或发布框架无关的智能�
 每个 `capabilities/<capability-id>/` 必须包含：
 
 ```text
-metadata.json
+capability-metadata.json
 SOUL.md
 USER.md
 AGENTS.md
@@ -81,7 +81,7 @@ Adapter 未经真实验证时，根清单状态应为 `experimental` 或 `resear
 
 发布前逐项检查：
 
-1. 根 `metadata.json` 能通过 `schema/metadata.schema.json`。
+1. 根 `package-metadata.json` 能通过 `schema/package-metadata.schema.json`，每个 `capability-metadata.json` 能通过 `schema/capability-metadata.schema.json`。
 2. 子清单引用的 skill、MCP、workspace asset 和环境变量均有根级或环境契约定义。
 3. ID 唯一，包内相对路径不含绝对路径或 `..`，技能依赖闭合。
 4. `.env`、Secret、真实服务地址、用户绝对路径、会话和运行状态不在包内。

@@ -20,9 +20,9 @@
 agent_metadata/
 ├── README.md                       # 人类入口（本文件）
 ├── BOOTSTRAP.md                    # 面向自举智能体的结果规约
-├── metadata.json                   # 根清单
+├── package-metadata.json                   # 根清单
 ├── schema/
-│   └── metadata.schema.json        # 根清单的 JSON Schema
+│   └── package-metadata.schema.json        # 根清单的 JSON Schema
 ├── common/
 │   ├── skills/<skill-id>/          # 完整技能目录
 │   ├── mcp/<mcp-id>.json           # MCP 逻辑需求
@@ -43,7 +43,7 @@ agent_metadata/
 | 文档                                            | 适合在什么时候读                                        |
 | --------------------------------------------- | ----------------------------------------------- |
 | [体系概览](docs/00-overview.md)                   | 第一次接触本规范，需要理解目标、边界和适用范围。                        |
-| [包结构与元数据](docs/01-package-and-metadata.md)    | 需要创建包、维护目录或编写根/子 `metadata.json`。               |
+| [包结构与元数据](docs/01-package-and-metadata.md)    | 需要创建包、维护目录或编写根 `package-metadata.json` 与能力域 `capability-metadata.json`。               |
 | [自举、适配与安全](docs/02-bootstrap-and-security.md) | 需要把资产部署到 Hermes、OpenCode 等宿主，或处理 Secret 与工作区资产。 |
 | [发布与验证](docs/03-release-and-verification.md)  | 需要打包发布，或验收一次自举是否真正成功。                           |
 
@@ -62,21 +62,21 @@ agent_metadata/
 git clone https://github.com/zztdandan/agent_metadata.git
 cd agent_metadata
 
-# 1. 阅读根 metadata.json 和 BOOTSTRAP.md
-cat metadata.json
+# 1. 阅读根 package-metadata.json 和 BOOTSTRAP.md
+cat package-metadata.json
 cat BOOTSTRAP.md
 
 # 2. 让你的 Agent 宿主自举（以 Hermes 为例）
-HERMES_HOME=./dist/hermes-test hermes chat -q "读取 metadata.json，列出可用能力域"
+HERMES_HOME=./dist/hermes-test hermes chat -q "读取 package-metadata.json，列出可用能力域"
 
 # 3. 验证自举结果（四层验收见 docs/03-release-and-verification.md）
 ```
 
 ### 创建一个新包
 
-1. 复制本仓库结构或从零搭建最小合法包：`metadata.json` + `README.md` + `BOOTSTRAP.md` + `schema/metadata.schema.json` + 至少一个能力域目录。
-2. 在根 `metadata.json` 登记 `package`、`capabilities`、`bootstrap` 等必填字段。
-3. 在 `capabilities/<id>/` 下编写 `SOUL.md`、`USER.md`、`AGENTS.md` 和子 `metadata.json`。
+1. 复制本仓库结构或从零搭建最小合法包：`package-metadata.json` + `README.md` + `BOOTSTRAP.md` + `schema/package-metadata.schema.json` + 至少一个能力域目录。
+2. 在根 `package-metadata.json` 登记 `package`、`capabilities`、`bootstrap` 等必填字段。
+3. 在 `capabilities/<id>/` 下编写 `SOUL.md`、`USER.md`、`AGENTS.md` 和`capability-metadata.json`。
 4. 把共享技能、MCP 声明、环境契约和工作区资产放进 `common/` 并在根清单登记。
 5. 运行发布前检查（见[发布与验证](docs/03-release-and-verification.md)）。
 
@@ -100,7 +100,7 @@ HERMES_HOME=./dist/hermes-test hermes chat -q "读取 metadata.json，列出可�
 
 ## 给自举智能体的最短路径
 
-1. 阅读根 `metadata.json` 和 `BOOTSTRAP.md`，了解包内资产与安全边界。
+1. 阅读根 `package-metadata.json` 和 `BOOTSTRAP.md`，了解包内资产与安全边界。
 2. 确认当前宿主的版本和能力；如有 Adapter，只把它当作参考。
 3. 选择能力域，确认目标工作区、既有配置的修改范围和缺失权限。
 4. 映射资产并进行宿主原生验证：身份、技能、MCP、环境变量和工作区资产都要实际可用。
@@ -117,7 +117,7 @@ HERMES_HOME=./dist/hermes-test hermes chat -q "读取 metadata.json，列出可�
 
 ## 状态
 
-当前草案版本为 `0.1.0`（协议版本 `0.1`）。首批试点可能会调整字段和目录；协议版本与包内容版本分开维护，规则见[发布与验证](docs/03-release-and-verification.md)。
+当前规范版本为 `0.2.0`（协议版本 `0.2`）。协议版本与包内容版本分开维护，规则见[发布与验证](docs/03-release-and-verification.md)。
 
 ## 贡献
 
@@ -125,7 +125,7 @@ HERMES_HOME=./dist/hermes-test hermes chat -q "读取 metadata.json，列出可�
 
 1. `dist/` 已清空，只保留 `.gitignore` 和 `README.md`。
 2. 包内没有 `.env`、真实 API Key、密码、Token 或用户绝对路径。
-3. `schema/metadata.schema.json` 存在，且根 `metadata.json` 能通过 Schema 校验。
+3. `schema/package-metadata.schema.json` 存在，且根 `package-metadata.json` 能通过 Schema 校验。
 4. 子清单的技能、MCP、工作区资产和环境变量引用都能在根清单或环境契约中找到。
 5. 路径不含绝对路径或 `../`；ID 没有重复；技能依赖闭合。
 

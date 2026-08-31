@@ -1,6 +1,6 @@
 # 包结构、清单与命名规则
 
-本参考定义 canonical 智能体元数据包的目录、根/子 `metadata.json` 与命名规则。根 `metadata.json` 是机器可读资产总表；能力域子清单只引用根级资产。
+本参考定义 canonical 智能体元数据包的目录、根 `package-metadata.json` 与能力域 `capability-metadata.json` 与命名规则。根 `package-metadata.json` 是机器可读资产总表；能力域子清单只引用根级资产。
 
 ## 最小合法包
 
@@ -8,10 +8,10 @@
 <package-root>/
 ├── README.md
 ├── BOOTSTRAP.md
-├── metadata.json
-├── schema/metadata.schema.json
+├── package-metadata.json
+├── schema/package-metadata.schema.json
 └── capabilities/<capability-id>/
-    ├── metadata.json
+    ├── capability-metadata.json
     ├── SOUL.md
     ├── USER.md
     └── AGENTS.md
@@ -25,8 +25,8 @@
 <package-root>/
 ├── README.md
 ├── BOOTSTRAP.md
-├── metadata.json
-├── schema/metadata.schema.json
+├── package-metadata.json
+├── schema/package-metadata.schema.json
 ├── common/
 │   ├── skills/<skill-id>/
 │   ├── mcp/<mcp-id>.json
@@ -40,11 +40,13 @@
 └── dist/
 ```
 
-## 根 metadata.json
+## 根 package-metadata.json
 
 ```json
 {
-  "schemaVersion": "0.1",
+  "$schema": "schema/package-metadata.schema.json",
+  "kind": "agent-metadata-package",
+  "schemaVersion": "0.2",
   "package": {
     "id": "example-agent-metadata",
     "version": "0.1.0",
@@ -79,7 +81,8 @@
 
 | 字段 | 要求 |
 |---|---|
-| `schemaVersion` | 必填；当前协议为 `"0.1"`。 |
+| `$schema` / `kind` | 必填；分别指向根 Schema，并固定为 `agent-metadata-package`。 |
+| `schemaVersion` | 必填；当前协议为 `"0.2"`。 |
 | `package` | 必填；含小写连字符 `id` 和语义化 `version`。 |
 | `capabilities` | 必填且至少一项；每项含 `id` 和相对 `path`。 |
 | `skills`、`mcp`、`workspaceAssets` | 可选；每项在根级登记 ID 和相对路径。 |
@@ -90,10 +93,13 @@
 
 Adapter 状态为 `verified`、`experimental`、`research_required` 或 `unsupported`。只有真实版本已验证时才能使用 `verified`。
 
-## capability 子 metadata.json
+## capability capability-metadata.json
 
 ```json
 {
+  "$schema": "../../schema/capability-metadata.schema.json",
+  "kind": "agent-capability",
+  "schemaVersion": "0.2",
   "capabilityId": "example-agent",
   "skills": ["example-skill"],
   "mcp": ["example-mcp"],
@@ -102,6 +108,7 @@ Adapter 状态为 `verified`、`experimental`、`research_required` 或 `unsuppo
 }
 ```
 
+- `kind` 必须为 `agent-capability`，`schemaVersion` 必须为 `"0.2"`。
 - `capabilityId` 必须等于根清单中该能力域 ID。
 - `skills`、`mcp`、`workspaceAssets` 只写根清单已登记的 ID。
 - `environment` 只写 `environment.json` 已声明的变量名。
@@ -110,7 +117,9 @@ Adapter 状态为 `verified`、`experimental`、`research_required` 或 `unsuppo
 ## 文件与目录命名
 
 - 资产 ID 使用小写连字符：`wiki-research`、`grafana`、`datasource-memory`。
-- 能力域文件固定为 `SOUL.md`、`USER.md`、`AGENTS.md` 和 `metadata.json`。
+- 能力域文件固定为 `SOUL.md`、`USER.md`、`AGENTS.md` 和 `capability-metadata.json`。
 - 技能入口固定为 `SKILL.md`，并带 `name`、`description` YAML frontmatter；`name` 必须等于根清单 skill ID。
 - 路径必须相对包根，不得含绝对路径或 `..`。
-- `evaluations/`、Adapter 内部文件（含 helpers、implementation 等）和技能内部文件清单不登记进 `metadata.json`。
+- `evaluations/`、Adapter 内部文件（含 helpers、implementation 等）和技能内部文件清单不登记进 `package-metadata.json`。
+
+两个 Schema 仅校验单文件结构；跨文件静态校验必须验证 capability 对根清单和环境契约的所有引用均闭合。

@@ -6,7 +6,7 @@
 
 ```text
 capabilities/<capability-id>/
-├── metadata.json
+├── capability-metadata.json
 ├── SOUL.md
 ├── USER.md
 └── AGENTS.md
@@ -15,7 +15,7 @@ capabilities/<capability-id>/
 - `SOUL.md`：身份、使命、价值取舍和硬边界。应简短，不能替代技能手册。
 - `USER.md`：用户画像、协作偏好和交互约定。
 - `AGENTS.md`：可直接复制的能力工作目录约束，记录长期生效的项目事实、目录、资产、读写与运行限制。它不承载按任务执行的逐步流程，也不写自举或宿主落点；任务流程属于技能，部署位置属于 `BOOTSTRAP.md` 与 Adapter。
-- `metadata.json`：引用共享资产。
+- `capability-metadata.json`：引用共享资产。
 
 若目标宿主不能分开加载这些文件，自举时按“身份与边界 → 工作目录约束 → 用户协作”合并，并保留来源章节；不得直接首尾拼接。`AGENTS.md` 不写宿主映射或任务工作流；该映射属于 `BOOTSTRAP.md` 与 Adapter。
 

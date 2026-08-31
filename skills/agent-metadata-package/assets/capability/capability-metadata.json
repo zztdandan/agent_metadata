@@ -1,0 +1,10 @@
+{
+  "$schema": "../../schema/capability-metadata.schema.json",
+  "kind": "agent-capability",
+  "schemaVersion": "0.2",
+  "capabilityId": "example-agent",
+  "skills": [],
+  "mcp": [],
+  "workspaceAssets": [],
+  "environment": []
+}

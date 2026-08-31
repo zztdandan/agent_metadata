@@ -1,8 +1,10 @@
 {
-  "schemaVersion": "0.1",
+  "$schema": "schema/package-metadata.schema.json",
+  "kind": "agent-metadata-package",
+  "schemaVersion": "0.2",
   "package": {
     "id": "karpathy-llm-wiki-vault-metadata",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "name": "Karpathy LLM Wiki Vault Metadata",
     "description": "Karpathy LLM Wiki Obsidian 知识库维护能力的元数据包示例"
   },

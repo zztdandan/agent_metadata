@@ -1,12 +1,19 @@
 {
+  "$schema": "../../schema/capability-metadata.schema.json",
+  "kind": "agent-capability",
+  "schemaVersion": "0.2",
   "capabilityId": "datacenter-dashboard-agent",
   "skills": [
     "datacenter-agent-runtime",
     "datacenter-agent-grafana-dashboard",
     "datacenter-agent-catalog-maintenance"
   ],
-  "mcp": ["grafana"],
-  "workspaceAssets": ["dedge-datacenter-project"],
+  "mcp": [
+    "grafana"
+  ],
+  "workspaceAssets": [
+    "dedge-datacenter-project"
+  ],
   "environment": [
     "GRAFANA_URL",
     "GRAFANA_SERVICE_ACCOUNT_TOKEN",

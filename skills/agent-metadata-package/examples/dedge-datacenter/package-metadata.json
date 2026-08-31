@@ -1,8 +1,10 @@
 {
-  "schemaVersion": "0.1",
+  "$schema": "schema/package-metadata.schema.json",
+  "kind": "agent-metadata-package",
+  "schemaVersion": "0.2",
   "package": {
     "id": "dedge-datacenter-agent-metadata",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "name": "Dedge Datacenter Agent Metadata",
     "description": "dedge 数据中心问数与 Grafana 看板能力的元数据包示例"
   },
@@ -17,14 +19,32 @@
     }
   ],
   "skills": [
-    { "id": "datacenter-agent-runtime", "path": "common/skills/datacenter-agent-runtime" },
-    { "id": "datacenter-agent-catalog-maintenance", "path": "common/skills/datacenter-agent-catalog-maintenance" },
-    { "id": "datacenter-agent-cloud-tss-query", "path": "common/skills/datacenter-agent-cloud-tss-query" },
-    { "id": "datacenter-agent-grafana-dashboard", "path": "common/skills/datacenter-agent-grafana-dashboard" },
-    { "id": "datacenter-agent-tdengine-longstmt", "path": "common/skills/datacenter-agent-tdengine-longstmt" }
+    {
+      "id": "datacenter-agent-runtime",
+      "path": "common/skills/datacenter-agent-runtime"
+    },
+    {
+      "id": "datacenter-agent-catalog-maintenance",
+      "path": "common/skills/datacenter-agent-catalog-maintenance"
+    },
+    {
+      "id": "datacenter-agent-cloud-tss-query",
+      "path": "common/skills/datacenter-agent-cloud-tss-query"
+    },
+    {
+      "id": "datacenter-agent-grafana-dashboard",
+      "path": "common/skills/datacenter-agent-grafana-dashboard"
+    },
+    {
+      "id": "datacenter-agent-tdengine-longstmt",
+      "path": "common/skills/datacenter-agent-tdengine-longstmt"
+    }
   ],
   "mcp": [
-    { "id": "grafana", "path": "common/mcp/grafana.json" }
+    {
+      "id": "grafana",
+      "path": "common/mcp/grafana.json"
+    }
   ],
   "environment": {
     "contract": "common/environment/environment.json",
@@ -37,7 +57,11 @@
     }
   ],
   "adapters": [
-    { "id": "hermes", "path": "adapters/hermes", "status": "experimental" }
+    {
+      "id": "hermes",
+      "path": "adapters/hermes",
+      "status": "experimental"
+    }
   ],
   "bootstrap": "BOOTSTRAP.md",
   "distribution": {

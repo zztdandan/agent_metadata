@@ -1,8 +1,10 @@
 {
-  "schemaVersion": "0.1",
+  "$schema": "schema/package-metadata.schema.json",
+  "kind": "agent-metadata-package",
+  "schemaVersion": "0.2",
   "package": {
     "id": "example-agent-metadata",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "name": "Example Agent Metadata",
     "description": "替换为包说明"
   },

@@ -1,0 +1,16 @@
+{
+  "$schema": "../../schema/capability-metadata.schema.json",
+  "kind": "agent-capability",
+  "schemaVersion": "0.2",
+  "capabilityId": "knowledge-wiki-maintenance",
+  "skills": [
+    "wiki-ingest",
+    "wiki-query",
+    "wiki-lint"
+  ],
+  "mcp": [],
+  "workspaceAssets": [
+    "llm-wiki-vault"
+  ],
+  "environment": []
+}

@@ -47,8 +47,8 @@
 
 1. `dist/` 已清空。
 2. 包内没有 `.env`、真实 API Key、密码、Token、非示例服务地址或用户绝对路径。
-3. `schema/metadata.schema.json` 存在，且根 `metadata.json` 能通过该 Schema 校验。
-4. 子清单的技能、MCP、工作区资产和环境变量引用都能在根清单或环境契约中找到。
+3. `schema/package-metadata.schema.json` 与 `schema/capability-metadata.schema.json` 均存在；根和每个能力域清单分别通过对应 Schema 校验。
+4. capability ID、技能、MCP、工作区资产和环境变量引用均能在根清单或环境契约中找到。
 5. 路径不含绝对路径或 `../`；ID 没有重复；技能依赖闭合。
 6. 归档内容与 `distribution.exclude` 一致。
 
