@@ -14,6 +14,7 @@
 8. 不含 `.env`、真实 Secret、Token、密码、真实 API Key、非示例生产地址、用户绝对路径、会话、日志、缓存、`state.db*` 或宿主运行状态。
 9. `dist/` 为空，或只保留 `.gitignore` 和 `README.md`。
 10. 归档排除项至少覆盖 `dist/**`、`**/.env`、会话、日志和状态文件。
+11. 若 `schemaVersion` 或规则约束自上一版本以来有变化，根 `CHANGELOG.md` 中有对应记录且已更新版本号。
 
 ## 建议的静态校验顺序
 

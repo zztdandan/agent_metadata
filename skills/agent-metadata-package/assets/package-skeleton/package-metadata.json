@@ -4,7 +4,7 @@
   "schemaVersion": "0.2",
   "package": {
     "id": "example-agent-metadata",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "name": "Example Agent Metadata",
     "description": "替换为包说明"
   },

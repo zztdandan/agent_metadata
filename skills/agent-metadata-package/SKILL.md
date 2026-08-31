@@ -104,3 +104,15 @@ Adapter 未经真实验证时，根清单状态应为 `experimental` 或 `resear
 - `examples/dedge-datacenter/`：多个 capability、技能组、MCP、环境契约、多个工作区资产和 Hermes Adapter。
 
 示例是可阅读的完整包，不是生产配置。优先从与任务复杂度相同的示例开始，再使用 `assets/` 的最小模板创建或补齐局部资产。
+
+## 版本与变更
+
+本技能遵循的当前规约版本：**0.2.1**（协议版本 `0.2`）。技能内的 `assets/` 和 `examples/` 均按此版本规约。
+
+如需从旧版本迁移元数据包，或了解规约规则的历史变更，阅读本技能目录下的 `CHANGELOG.md`。该文件记录了每次 `schemaVersion` 升级和规则约束变化的具体内容与迁移动作。
+
+当规约规则发生变化时，以下位置必须同步更新：
+
+1. `CHANGELOG.md`（本技能目录和项目根各一份，内容必须一致）：记录变更编号、类型、描述和迁移动作。
+2. 本段：更新当前版本号。
+3. `assets/package-skeleton/` 和 `examples/` 中的 `schemaVersion` 和 Schema 文件。

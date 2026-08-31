@@ -4,7 +4,7 @@
   "schemaVersion": "0.2",
   "package": {
     "id": "dedge-datacenter-agent-metadata",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "name": "Dedge Datacenter Agent Metadata",
     "description": "dedge 数据中心问数与 Grafana 看板能力的元数据包示例"
   },

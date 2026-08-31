@@ -117,7 +117,7 @@ HERMES_HOME=./dist/hermes-test hermes chat -q "读取 package-metadata.json，�
 
 ## 状态
 
-当前规范版本为 `0.2.0`（协议版本 `0.2`）。协议版本与包内容版本分开维护，规则见[发布与验证](docs/03-release-and-verification.md)。
+当前规范版本为 `0.2.1`（协议版本 `0.2`）。协议版本与包内容版本分开维护，规则见[发布与验证](docs/03-release-and-verification.md)。版本间的规则变更记录见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 贡献
 

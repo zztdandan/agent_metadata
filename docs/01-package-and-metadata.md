@@ -51,7 +51,7 @@ agent_metadata/
   "schemaVersion": "0.2",
   "package": {
     "id": "dedge-agent-metadata",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "name": "Dedge Agent Metadata",
     "description": "dedge 组织智能体元数据包"
   },
