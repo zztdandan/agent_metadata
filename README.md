@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.png" alt="AGENT_METADATA" width="128">
+</p>
+
 ![Spec](https://img.shields.io/badge/spec-v0.2.2-blue.svg)
 ![Protocol](https://img.shields.io/badge/schema-0.2-informational.svg)
 ![Kind](https://img.shields.io/badge/kind-agent--metadata--package-purple.svg)
