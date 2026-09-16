@@ -1,12 +1,12 @@
 <p align="center">
   <img src="assets/icon.png" alt="AGENT_METADATA" width="128">
+  <br>
+  <a href="https://github.com/zztdandan/agent_metadata/releases"><img src="https://img.shields.io/badge/spec-v0.2.2-blue.svg" alt="Spec"></a>
+  <img src="https://img.shields.io/badge/schema-0.2-informational.svg" alt="Protocol">
+  <img src="https://img.shields.io/badge/kind-agent--metadata--package-purple.svg" alt="Kind">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
-
-![Spec](https://img.shields.io/badge/spec-v0.2.2-blue.svg)
-![Protocol](https://img.shields.io/badge/schema-0.2-informational.svg)
-![Kind](https://img.shields.io/badge/kind-agent--metadata--package-purple.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 # AGENT_METADATA
 
